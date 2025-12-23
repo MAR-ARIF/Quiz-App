@@ -22,7 +22,7 @@ p{
 }
 
 .quiz-container{
-    display: flex;
+    display: none;
     justify-content: center;
     align-items: center;
     flex-direction: column;
@@ -74,4 +74,11 @@ p{
 #btn:hover{
     transform: scale(1.05);
     opacity: 0.8;
+}
+#start-btn{
+    padding: 12px 25px;
+    font-size: larger;
+    font-weight: bold;
+    border-radius: 6px;
+    color: brown;
 }

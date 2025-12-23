@@ -81,4 +81,9 @@ p{
     font-weight: bold;
     border-radius: 6px;
     color: brown;
+    cursor: pointer;
+}
+#start-btn:hover{
+    transform: scale(1.1);
+    
 }

@@ -1,0 +1,77 @@
+body{
+    background-image: url(background.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+h1{
+    text-align: center;
+    color: rgb(247, 247, 247);
+}
+p{
+    text-align: center;
+    font-size: larger;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-style: italic;
+    color: rgb(246, 246, 246);
+}
+
+.quiz-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.questions-radio{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid rgb(205, 180, 180);
+    border-radius: 12px;
+    padding: 30px;
+    margin: 30px auto;
+    background-color: rgb(243, 243, 243);
+    width: 100%;
+    max-width: 600px;
+
+}
+.questions{
+    font-size:x-large;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight:500;
+}
+.radioes{
+    font-size: large;
+    align-self: flex-start;
+    
+
+}
+.butn{
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+    max-width: 600px;
+    padding-left: 100px;
+
+}
+#btn{
+    padding: 12px 25px;
+    font-size: 20px;
+    font-weight: bolder;
+    background-color: rgb(199, 67, 52);
+    color: rgb(255, 255, 255);
+    border: 2px solid rgb(255, 255, 255);
+    border-radius: 12px;
+    cursor: pointer;
+    
+}
+#btn:hover{
+    transform: scale(1.05);
+    opacity: 0.8;
+}

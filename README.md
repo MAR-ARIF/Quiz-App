@@ -7,7 +7,7 @@ This app fetches questions from the **Open Trivia Database API** and allows user
 
 ## 🚀 Live Demo
 
-You can host this project on **GitHub Pages** or any static web server to try it live.
+[You can host this project on **GitHub Pages** or any static web server to try it live.](https://mar-arif.github.io/Quiz-App/)
 
 ---
 

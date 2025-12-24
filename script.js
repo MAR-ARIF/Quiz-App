@@ -1,10 +1,15 @@
 // Select the elements from the HTML
-const questionEl = document.querySelector(".questions");      // Div where the question text will appear
-const optionEl = document.querySelector(".radioes");          // Div where the options (radio buttons) will appear
-const quizEl = document.querySelector(".quiz-container");     // The entire quiz container (question + options)
-const startButtton = document.querySelector("#start-btn");    // Start Quiz button
-const nextButton = document.querySelector("#btn");            // Next button to go to next question
-const qRadio = document.querySelector(".questions-radio");    // Div that wraps question + options
+let questionEl = document.querySelector(".questions");      // Div where the question text will appear
+let optionEl = document.querySelector(".radioes");          // Div where the options (radio buttons) will appear
+let quizEl = document.querySelector(".quiz-container");     // The entire quiz container (question + options)
+let startButtton = document.querySelector("#start-btn");    // Start Quiz button
+let nextButton = document.querySelector("#btn");            // Next button to go to next question
+let qRadio = document.querySelector(".questions-radio");    // Div that wraps question + options
+let restartBtn = document.querySelector("#restart-btn");  //restart button
+
+// Save the original quiz structure so we can restore it later
+let originalQuizHTML = qRadio.innerHTML ;
+
 
 // Initialize variables
 let questions = [];      // Array to store fetched questions from API
@@ -78,7 +83,32 @@ nextButton.addEventListener("click", () => {
         qRadio.innerHTML = `<h2>Thanks for Playing! Your score is ${score}</h2>`;
         document.querySelector("h1").style.display = "none";   // Hide heading
         document.querySelector("p").style.display = "none";    // Hide instructions
-        nextButton.style.display = "none";                     // Hide Next button
+        nextButton.style.display = "none";  // Hide Next button
+
+        restartBtn.style.display = "inline-block";
+
     }
 })
+
+restartBtn.addEventListener("click", async () => {
+    currentIndex = 0;
+    score = 0;
+
+    // Restore original quiz structure
+    qRadio.innerHTML = originalQuizHTML;
+
+    // Re-select elements because DOM was replaced
+    questionEl = document.querySelector(".questions");
+    optionEl = document.querySelector(".radioes");
+
+    restartBtn.style.display = "none";
+    quizEl.style.display = "flex";
+    nextButton.style.display = "inline-block";
+
+    document.querySelector("h1").style.display = "block";
+    document.querySelector("p").style.display = "block";
+
+    await fetchQuestions();
+    displayQuestions();
+});
 

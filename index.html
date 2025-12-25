@@ -9,6 +9,26 @@
 <body>
     
     <h1>WELCOME TO ARIF'S QUIZ APP</h1>
+    <div class="settings">
+        <label for="category">Select Quiz Category</label>
+        <select id="category">
+            <option value="">Any Catogry</option>
+            <option value="9">General Knowledge</option>
+            <option value="18">Computer Science</option>
+            <option value="21">Sports</option>
+        </select>
+        <label for="difficulty">Set Difficulty</label>
+        <select id="difficulty">
+            <option value="">Any difficulty</option>
+            <option value="easy">Easy</option>
+            <option value="medium">Medium</option>
+            <option value="hard">Hard</option>
+
+        </select>
+        <label for="qNum">Set Questions number</label>
+        <input type="number" id="qNum" min="5" max="20" value="5">
+
+    </div>
     <p>Answer the following questions. For every correct answers you will get one point.</p>
     <button id="start-btn" type="button">Start Quiz</button>
     <div class="quiz-container">

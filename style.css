@@ -104,3 +104,7 @@ p{
     margin-bottom: 40px;
     color: rgb(78, 233, 238);
 }
+.timer{
+    font-size: larger;
+    font-weight: 500;
+}

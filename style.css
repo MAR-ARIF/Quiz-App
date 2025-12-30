@@ -108,3 +108,20 @@ p{
     font-size: larger;
     font-weight: 500;
 }
+@keyframes blink {
+    0% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+    
+}
+.timer-warning{
+    color:red;
+    font-weight: bold;
+    animation: blink 1s infinite;
+}

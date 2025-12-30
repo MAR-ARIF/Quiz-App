@@ -7,6 +7,7 @@ let nextButton = document.querySelector("#btn");            // Next button to go
 let qRadio = document.querySelector(".questions-radio");    // Div that wraps question + options
 let restartBtn = document.querySelector("#restart-btn");  //restart button
 let para = document.querySelector("#first-para");
+let timer = document.querySelector(".timer p");
 let category = "";
 let difficulty = "";
 let amount = 5;
@@ -16,7 +17,8 @@ para.style.display = "none";   // to hide instruction initially
 // Save the original quiz structure so we can restore it later
 
 let originalQuizHTML = qRadio.innerHTML ;
-
+let timeLeft = 20;
+let timerId = null;
 
 
 // Initialize variables
@@ -64,9 +66,11 @@ const displayQuestions =() => {
 
 // Event listener for Start Quiz button
 startButtton.addEventListener("click", async () => {
+    
     category = document.querySelector("#category").value;
     difficulty = document.querySelector("#difficulty").value;
     amount = document.querySelector("#qNum").value;
+    startTimer();
     nextButton.style.display = "inline-block";
     
     
@@ -80,12 +84,11 @@ startButtton.addEventListener("click", async () => {
 
 // Event listener for Next button
 nextButton.addEventListener("click", () => {
+    clearInterval(timerId);
+    timerId = null;
+    startTimer();
     const selected = document.querySelector('input[name="answer"]:checked');  // Get the selected radio option
     
-    if(!selected){
-        alert("Please select one option.");  // Show alert if no option is selected
-        return;
-    }
 
     // Check if selected answer is correct
     if (selected.value === questions[currentIndex].correct_answer){
@@ -97,18 +100,15 @@ nextButton.addEventListener("click", () => {
     if (currentIndex < questions.length){
         displayQuestions();  // Display next question if available
     } else {
-        // If all questions are done, show final score
-        qRadio.innerHTML = `<h2>Thanks for Playing! Your score is ${score}</h2>`;
-        document.querySelector("h1").style.display = "none";   // Hide heading
-        document.querySelector("p").style.display = "none";    // Hide instructions
-        nextButton.style.display = "none";  // Hide Next button
-
-        restartBtn.style.display = "inline-block";
+        endQuiz();
+        
 
     }
 })
 
 restartBtn.addEventListener("click", async () => {
+    clearInterval(timerId);
+    timerId=null;
     currentIndex = 0;
     score = 0;
     // Restore original quiz structure
@@ -125,12 +125,52 @@ restartBtn.addEventListener("click", async () => {
     optionEl = document.querySelector(".radioes");
 
     restartBtn.style.display = "none";
+    timer.style.display = "inline-block";
 
 
     document.querySelector("h1").style.display = "block";
     //document.querySelector("p").style.display = "block";
 
-    //await fetchQuestions();
-    //displayQuestions();
 });
+function startTimer(){
+    timeLeft = difficulty === "easy"? 20 : difficulty === "medium"? 25 :30 ;
+    timer.innerText = `Time Remaining: ${timeLeft}s`;
+
+    timerId = setInterval(()=>{
+        timeLeft--;
+        timer.innerText = `Time Remaining: ${timeLeft}s`;
+        if (timeLeft <= 5){
+            timer.classList.add("timer-warning");
+        } else {
+            timer.classList.remove("timer-warning");
+        }
+        if (timeLeft === 0){
+            goToNextQ();
+        }
+    },1000);
+
+}
+function goToNextQ(){
+    clearInterval(timerId);
+    timerId = null;
+
+    currentIndex++;
+    if (currentIndex < questions.length){
+        displayQuestions();
+        startTimer();
+    } else {
+        endQuiz();
+        
+    }
+}
+function endQuiz(){
+    // If all questions are done, show final score
+    qRadio.innerHTML = `<h2>Thanks for Playing! Your score is ${score}</h2>`;
+    document.querySelector("h1").style.display = "none";   // Hide heading
+    document.querySelector("p").style.display = "none";    // Hide instructions
+    timer.style.display = "none";
+    nextButton.style.display = "none";  // Hide Next button
+
+    restartBtn.style.display = "inline-block";
+}
 
